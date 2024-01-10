@@ -39,19 +39,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 35),
                     Align(
                       alignment: Alignment.topCenter,
                       child: Column(
                         children: [
+                          const SizedBox(height: 30),
                           Image.asset(
                             'assets/images/plm_logo.png',
-                            height: 200,
+                            height: 89,
                           ),
+                          const SizedBox(height: 10),
                           const Text(
                             'Pamantasan ng Lungsod ng Maynila',
                             style:
-                                TextStyle(color: Color(0xFF424242), fontSize: 16),
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
+                          ),
+                          const Text(
+                            'Computerized Registration System',
+                            style:
+                                TextStyle(color: Color(0xFF424242), fontSize: 12),
                           ),
                           const SizedBox(height: 30),
                         ],

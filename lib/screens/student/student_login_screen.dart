@@ -13,11 +13,13 @@ class StudentLoginScreen extends StatefulWidget {
 
 class _StudentLoginScreenState extends State<StudentLoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController SSOCodeController = TextEditingController();
+
+  bool showTextFieldCode = false;
 
   @override
   Widget build(BuildContext context) {
+    double containerHeight = showTextFieldCode ? 360.0 : 390.0;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -30,7 +32,7 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
           children: [
             Center(
               child: Container(
-                height: 390,
+                height: containerHeight,
                 width: 280,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -54,86 +56,127 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                               const SizedBox(height: 10),
                               const Text(
                                 'Pamantasan ng Lungsod ng Maynila',
-                                style:
-                                    TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontSize: 12,
+                                ),
                               ),
                               const Text(
                                 'Computerized Registration System',
                                 style: TextStyle(
                                   color: Color(0xFF424242),
                                   fontSize: 12,
-                                  fontStyle: FontStyle.italic, // Add this line to make the text italic
+                                  fontStyle: FontStyle.italic,
                                 ),
                               ),
                               const SizedBox(height: 30),
                             ],
                           ),
                         ),
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Login with SSO',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/key_icon.png',
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
-                        ),
 
-                        SizedBox(height: 12.0),
-                        
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Sign in With Microsoft Account',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/microsoft_icon.png', 
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
-                        ),
+                        // Conditionally include either the buttons or the text field
+                        if (showTextFieldCode)
+                          Column(
+                            children: [
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  setState(() {
+                                    showTextFieldCode = !showTextFieldCode;
+                                  });
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Login with SSO',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/key_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
 
-                        SizedBox(height: 12.0),
+                              SizedBox(height: 12.0),
 
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            GoRouter.of(context).go('/student-login');
-                          },
-                          bgColorOpacity: 255, // Opacity, ranging from 0 to 255
-                          bgColorHex: 0xFFC83B, // Hexadecimal background color
-                          buttonText: 'Enroll at PLM',
-                          textColorHex: Colors.white.value, 
-                          buttonBorder: BorderSide(color: Color(0xFFB36C02), width: 1),
+                              TextFieldCommon(
+                                controller: SSOCodeController,
+                                hintText: 'Enter Verification Code',
+                                obscureText: false,
+                                validator: numericValidator,
+                                showButton: true,
+                                buttonColor: Color(0xFFC83B),
+                                buttonIconPath: 'assets/icons/arrow_right.png',
+                              ),
+                            ],
+                          )
+                        else
+                          Column(
+                            children: [
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  setState(() {
+                                    showTextFieldCode = !showTextFieldCode;
+                                  });
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Login with SSO',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/key_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
+
+                              SizedBox(height: 12.0),
+
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  print('clicked');
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Sign in With Microsoft Account',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/microsoft_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
+
+                               SizedBox(height: 12.0),
+
+                                ButtonCommon(
+                                  onPressFunctionName: () {
+                                    GoRouter.of(context).go('/student-login');
+                                  },
+                                  bgColorOpacity: 255,
+                                  bgColorHex: 0xFFC83B,
+                                  buttonText: 'Enroll at PLM',
+                                  textColorHex: Colors.white.value,
+                                  buttonBorder: BorderSide(color: Color(0xFFB36C02), width: 1),
+                                ),
+                            ],
                           ),
-                        ],
-                      ),
+                      ],
                     ),
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  print('Trouble clicked');
-                },
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
+            ),
+            GestureDetector(
+              onTap: () {
+                print('Trouble clicked');
+              },
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
                   padding: const EdgeInsets.only(bottom: 30.0),
                   child: Text(
                     'Having trouble signing in?',
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       decorationColor: Colors.white,
-                      color: Colors.white
+                      color: Colors.white,
                     ),
-                  ),
                   ),
                 ),
               ),
+            ),
           ],
-        )
+        ),
       ),
     );
   }

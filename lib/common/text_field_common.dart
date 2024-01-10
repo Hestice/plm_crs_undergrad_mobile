@@ -6,6 +6,9 @@ class TextFieldCommon extends StatefulWidget {
   final bool obscureText;
   final String? Function(String?) validator;
   final bool enabled;
+  final bool showButton;
+  final Color? buttonColor; // Background color of the button
+  final String? buttonIconPath;
 
   const TextFieldCommon({
     super.key,
@@ -13,11 +16,13 @@ class TextFieldCommon extends StatefulWidget {
     required this.hintText,
     required this.obscureText,
     required this.validator,
-    this.enabled = true, //optional parameter
+    this.enabled = true,
+    this.showButton = false,
+    this.buttonColor,
+    this.buttonIconPath,
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _TextFieldCommonState createState() => _TextFieldCommonState();
 }
 
@@ -41,34 +46,70 @@ class _TextFieldCommonState extends State<TextFieldCommon> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: widget.controller,
-          obscureText: widget.obscureText,
-          style: const TextStyle(color: Colors.black),
-          decoration: InputDecoration(
-            hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey.shade500),
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(1.0),
-              borderSide: BorderSide(color: Color.fromARGB(55, 45, 90, 138)),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 15,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(
-                color: Colors.black,
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: widget.controller,
+                obscureText: widget.obscureText,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12, // Set the font size to 12
+                ),
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  hintStyle: TextStyle(color: Colors.grey.shade500),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                    borderSide: BorderSide(color: Color.fromARGB(55, 45, 90, 138)),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 15,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                validator: widget.validator,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                focusNode: _focusNode,
+                enabled: widget.enabled,
               ),
             ),
-          ),
-          validator: widget.validator,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          focusNode: _focusNode,
-          enabled: widget.enabled,
+           if (widget.showButton)
+              SizedBox(width: 5.0),
+              Center(
+                child: Container(
+                  height: 48.5,
+                  width: 45,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add button click action here
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: widget.buttonColor ?? Colors.yellow, // Use the provided color directly
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+                    ),
+                    child: Text(
+                      ">",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ],
     );

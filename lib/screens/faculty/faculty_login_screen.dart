@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:crs_undergrad/common/text_field_common.dart';
 import 'package:crs_undergrad/helpers/validator_helper.dart';
-
+import 'package:crs_undergrad/common/button_common.dart';
 class FacultyLoginScreen extends StatefulWidget {
   const FacultyLoginScreen({Key? key}) : super(key: key);
 
@@ -21,44 +21,53 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/faculty_login_screen.png'),
+            image: AssetImage('assets/images/faculty_login_screen_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Container(
-            height: 360,
-            width: 280,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(11),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 30),
-                          Image.asset(
-                            'assets/images/plm_logo.png',
-                            height: 89,
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                height: 360,
+                width: 280,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 30),
+                              Image.asset(
+                                'assets/images/plm_logo.png',
+                                height: 89,
+                              ),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Pamantasan ng Lungsod ng Maynila',
+                                style:
+                                    TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
+                              ),
+                              const Text(
+                                'Computerized Registration System',
+                                style: TextStyle(
+                                  color: Color(0xFF424242),
+                                  fontSize: 12,
+                                  fontStyle: FontStyle.italic, // Add this line to make the text italic
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                            ],
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Pamantasan ng Lungsod ng Maynila',
-                            style:
-                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
-                          ),
-                          const Text(
-                            'Computerized Registration System',
-                            style:
-                                TextStyle(color: Color(0xFF424242), fontSize: 12),
-                          ),
+                          
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -117,16 +126,37 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
+
                         ),
-                      ),
+
+                      ],
                     ),
-                    SizedBox(height: 20),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+            GestureDetector(
+                onTap: () {
+                  print('Trouble clicked');
+                },
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                  padding: const EdgeInsets.only(bottom: 30.0),
+                  child: Text(
+                    'Having trouble signing in?',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                      color: Colors.white
+                    ),
+                  ),
+                  ),
+                ),
+              ),
+          ],
+        )
+        
       ),
     );
   }

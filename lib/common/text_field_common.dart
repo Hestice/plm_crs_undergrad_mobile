@@ -44,14 +44,17 @@ class _TextFieldCommonState extends State<TextFieldCommon> {
         TextFormField(
           controller: widget.controller,
           obscureText: widget.obscureText,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 12, // Set the font size to 12
+          ),
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: TextStyle(color: Colors.grey.shade500),
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(1.0),
+              borderRadius: BorderRadius.circular(6.0),
               borderSide: BorderSide(color: Color.fromARGB(55, 45, 90, 138)),
             ),
             contentPadding: const EdgeInsets.symmetric(
@@ -59,7 +62,7 @@ class _TextFieldCommonState extends State<TextFieldCommon> {
               horizontal: 15,
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(6.0),
               borderSide: const BorderSide(
                 color: Colors.black,
               ),

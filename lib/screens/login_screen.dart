@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    SizedBox(height: 12.0),
                     
                     ButtonCommon(
                       onPressFunctionName: () {
@@ -80,7 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       bgColorOpacity: 255, // Opacity, ranging from 0 to 255
                       bgColorHex: 0xFFC83B, // Hexadecimal background color
                       buttonText: 'Student Account',
-                      textColorHex: Colors.white.value, // Hexadecimal text color
+                      textColorHex: Colors.white.value, 
+                      buttonBorder: BorderSide(color: Color(0xFFF1B418), width: 1),
                     ),
 
                     SizedBox(height: 10.0),
@@ -92,10 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       bgColorOpacity: 255, // Opacity, ranging from 0 to 255
                       bgColorHex: 0x3E8AD0, // Hexadecimal background color
                       buttonText: 'Faculty Account',
-                      textColorHex: Colors.white.value, // Hexadecimal text color
+                      textColorHex: Colors.white.value,
+                      buttonBorder: BorderSide(color: Color(0xFF1867B0), width: 1),
                     ),
-
-  
                     SizedBox(height: 20),
                   ],
                 ),

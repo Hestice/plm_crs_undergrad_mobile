@@ -1,8 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:crs_undergrad/screens/login_screen.dart';
 import 'package:crs_undergrad/screens/faculty/faculty_login_screen.dart';
 import 'package:crs_undergrad/screens/student/student_login_screen.dart';
 import 'package:crs_undergrad/screens/landing_screen.dart';
+
+import '../screens/faculty/faculty_assignment_detail_screen.dart';
+import '../screens/faculty/faculty_assignments_screen.dart';
+import '../screens/faculty/faculty_dashboard_screen.dart';
+import '../screens/faculty/faculty_teaching_assignment_screen.dart';
 
 var router = GoRouter(
   routes: [
@@ -22,5 +28,22 @@ var router = GoRouter(
       path: '/faculty-login',
       builder: (context, state) => FacultyLoginScreen(),
     ),
+    GoRoute(
+      path: '/faculty-dashboard',
+      builder: (context, state) => FacultyDashboard(),
+    ),
+    GoRoute(
+      path: '/teaching-assignment',
+      builder: (context, state) => TeachingAssignment(),
+    ),
+    GoRoute(
+      path: '/view-assignments',
+      builder: (context, state) => ViewAssignmentsScreen(),
+    ),
+    GoRoute(
+      path: '/assignment-detail',
+      builder: (context, state) => AssignmentDetailScreen(id: '',),
+    ),
+
   ],
 );

@@ -12,7 +12,7 @@ class _LandingScreenState extends State<LandingScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
-      GoRouter.of(context).go('/login');
+      GoRouter.of(context).go('/faculty-dashboard');
     });
   }
 

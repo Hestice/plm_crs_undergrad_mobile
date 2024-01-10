@@ -80,7 +80,6 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                       validator: passwordValidator,
                     ),
                     SizedBox(height: 16.0),
-
                     // Forgot password
                     GestureDetector(
                       onTap: () {
@@ -95,22 +94,24 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                       ),
                     ),
                     SizedBox(height: 16.0),
-
                     // Login button
                     ElevatedButton(
                       onPressed: () {
-                        GoRouter.of(context).go('/home');
-                        // Implement login button functionality here
+                        // Before navigating, ensure that the form is valid
+                        if (_formKey.currentState?.validate() ?? false) {
+                          // If the form is valid, navigate to the faculty dashboard
+                          GoRouter.of(context).go('/faculty-dashboard');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFC83B), // Corrected color code
+                        primary: Colors.blue, // Visible color against white background
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1.0),
+                          borderRadius: BorderRadius.circular(4.0), // Consistent with Material Design
                         ),
-                        minimumSize: Size(double.infinity, 0),
+                        minimumSize: Size(double.infinity, 50), // Ensures the button is tall enough
                       ),
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                           color: Colors.white,

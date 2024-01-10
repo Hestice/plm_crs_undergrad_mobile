@@ -105,7 +105,7 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                                   width: 45, // Adjust the width as needed
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      GoRouter.of(context).go('/faculty-login');
+                                      GoRouter.of(context).go('/faculty-dashboard');
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Color(0xFF3E8AD0), // Background color

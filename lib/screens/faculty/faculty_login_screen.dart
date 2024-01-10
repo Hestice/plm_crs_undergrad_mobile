@@ -12,8 +12,9 @@ class FacultyLoginScreen extends StatefulWidget {
 
 class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController SSOCodeController = TextEditingController();
+  
+  bool showTextFieldCode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,32 +69,96 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                             ],
                           ),
                         ),
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Login with SSO',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/key_icon.png',
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
-                        ),
 
-                        SizedBox(height: 12.0),
-                        
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Sign in With Microsoft Account',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/microsoft_icon.png', 
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
-                        ),
+                        if (showTextFieldCode)
+                          Column(
+                            children: [
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  setState(() {
+                                    showTextFieldCode = !showTextFieldCode;
+                                  });
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Login with SSO',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/key_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
 
+                              SizedBox(height: 12.0),
+
+                              Row(
+                              children: [
+                                Expanded(
+                                  child: TextFieldCommon(
+                                    controller: SSOCodeController,
+                                    hintText: 'Enter Verification Code',
+                                    obscureText: false,
+                                    validator: numericValidator,
+                                  ),
+                                ),
+                                SizedBox(width: 5.0),
+                                Container(
+                                  height: 48.5, // Adjust the height as needed
+                                  width: 45, // Adjust the width as needed
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      GoRouter.of(context).go('/faculty-login');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xFF3E8AD0), // Background color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6.0),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      ">",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),  
+                            ],
+                          )
+                        else
+                          Column(
+                            children: [
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  setState(() {
+                                    showTextFieldCode = !showTextFieldCode;
+                                  });
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Login with SSO',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/key_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
+
+                              SizedBox(height: 12.0),
+
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  GoRouter.of(context).go('/faculty-login');
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: Colors.white.value,
+                                buttonText: 'Sign in With Microsoft Account',
+                                textColorHex: Colors.black.value,
+                                iconPath: 'assets/icons/microsoft_icon.png',
+                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ),

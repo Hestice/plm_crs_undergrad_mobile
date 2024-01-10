@@ -27,5 +27,9 @@ var router = GoRouter(
       path: '/student-home',
       builder: (context, state) => StudentHome(),
     ),
+    // GoRoute(
+    //   path: '/faculty-home',
+    //   builder: (context, state) => FacultyHome(),
+    // ),
   ],
 );

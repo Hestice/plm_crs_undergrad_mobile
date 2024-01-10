@@ -74,7 +74,6 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                           ),
                         ),
 
-                        // Conditionally include either the buttons or the text field
                         if (showTextFieldCode)
                           Column(
                             children: [

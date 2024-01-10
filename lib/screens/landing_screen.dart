@@ -20,7 +20,7 @@ class _LandingScreenState extends State<LandingScreen> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Stack(
-            // Your other widgets go here
+            
           ),
         ),
       ),

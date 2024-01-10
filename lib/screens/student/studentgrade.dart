@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class StudentGrade extends StatefulWidget {
   const StudentGrade({Key? key}) : super(key: key);
@@ -165,7 +166,7 @@ class _StudentGradeState extends State<StudentGrade> {
               const SizedBox(height: 8), // Adding some space between buttons
               ElevatedButton(
                 onPressed: () {
-                  // Add your button 2 action here
+                  GoRouter.of(context).go('/login');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,

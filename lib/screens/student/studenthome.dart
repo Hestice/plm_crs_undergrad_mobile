@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Item {
   Item({
@@ -151,7 +152,7 @@ class _StudentHomeState extends State<StudentHome> {
               const SizedBox(height: 8), // Adding some space between buttons
               ElevatedButton(
                 onPressed: () {
-                  // Add your button 2 action here
+                  GoRouter.of(context).go('/login');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
@@ -192,7 +193,9 @@ class _StudentHomeState extends State<StudentHome> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).go('/student-grades');
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // Set button background color
                   shape: RoundedRectangleBorder(

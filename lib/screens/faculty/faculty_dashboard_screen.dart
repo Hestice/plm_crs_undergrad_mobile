@@ -108,7 +108,7 @@ class FacultyDashboard extends StatelessWidget {
             // Logout Button
             ElevatedButton(
               onPressed: () {
-                // Handle logout
+                GoRouter.of(context).go('/login');
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.red, // Background color

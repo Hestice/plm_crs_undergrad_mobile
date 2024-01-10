@@ -63,13 +63,13 @@ class ViewAssignmentsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () => context.go('/'), // Navigate to home/dashboard
+                onPressed: () => context.go('/faculty-dashboard'), // Navigate to home/dashboard
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 child: const Text('Back'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Handle log out
+                  GoRouter.of(context).go('/login');
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.red),
                 child: const Text('Log Out'),

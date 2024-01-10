@@ -5,6 +5,7 @@ import 'package:crs_undergrad/screens/faculty/faculty_login_screen.dart';
 import 'package:crs_undergrad/screens/student/student_login_screen.dart';
 import 'package:crs_undergrad/screens/landing_screen.dart';
 import 'package:crs_undergrad/screens/student/studenthome.dart';
+import 'package:crs_undergrad/screens/student/studentgrade.dart';
 
 import '../screens/faculty/faculty_assignment_detail_screen.dart';
 import '../screens/faculty/faculty_assignments_screen.dart';
@@ -48,6 +49,10 @@ var router = GoRouter(
      GoRoute(
       path: '/student-home',
       builder: (context, state) => StudentHome(),
+    ),
+    GoRoute(
+      path: '/student-grades',
+      builder: (context, state) => StudentGrade(),
     ),
     // GoRoute(
     //   path: '/faculty-home',

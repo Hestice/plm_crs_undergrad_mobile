@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:crs_undergrad/configs/app_routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +10,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp.router(
+      routerConfig: router,
+      title: 'PLM CRS Undergrad',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
     );
   }

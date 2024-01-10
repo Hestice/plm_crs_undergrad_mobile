@@ -3,14 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:crs_undergrad/common/text_field_common.dart';
 import 'package:crs_undergrad/helpers/validator_helper.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class StudentLoginScreen extends StatefulWidget {
+  const StudentLoginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _StudentLoginScreenState createState() => _StudentLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _StudentLoginScreenState extends State<StudentLoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/mainscreen_bg.png'),
+            image: AssetImage('assets/images/student_login_screen_bg.png'),
             fit: BoxFit.cover,
           ),
         ),

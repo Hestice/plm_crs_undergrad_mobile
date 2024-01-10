@@ -61,8 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const Text(
                             'Computerized Registration System',
-                            style:
-                                TextStyle(color: Color(0xFF424242), fontSize: 12),
+                            style: TextStyle(
+                              color: Color(0xFF424242),
+                              fontSize: 12,
+                              fontStyle: FontStyle.italic, // Add this line to make the text italic
+                            ),
                           ),
                           const SizedBox(height: 30),
                         ],
@@ -72,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     
                     ButtonCommon(
                       onPressFunctionName: () {
-                        print('clicked');
+                        GoRouter.of(context).go('/student-login');
                       },
                       bgColorOpacity: 255, // Opacity, ranging from 0 to 255
                       bgColorHex: 0xFFC83B, // Hexadecimal background color
@@ -84,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     
                     ButtonCommon(
                       onPressFunctionName: () {
-                        print('clicked');
+                        GoRouter.of(context).go('/faculty-login');
                       },
                       bgColorOpacity: 255, // Opacity, ranging from 0 to 255
                       bgColorHex: 0x3E8AD0, // Hexadecimal background color

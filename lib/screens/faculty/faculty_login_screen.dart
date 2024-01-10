@@ -67,31 +67,66 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
                               const SizedBox(height: 30),
                             ],
                           ),
-                        ),
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Login with SSO',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/key_icon.png',
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
-                        ),
+                          
+                          const SizedBox(height: 30),
+                        ],
+                      ),
+                    ),
+                    // Text field for username/email
+                    TextFieldCommon(
+                      controller: emailController,
+                      hintText: 'Username/Email',
+                      obscureText: false,
+                      validator: emailValidator,
+                    ),
+                    SizedBox(height: 16.0),
 
-                        SizedBox(height: 12.0),
-                        
-                        ButtonCommon(
-                          onPressFunctionName: () {
-                            print('clicked');
-                          },
-                          bgColorOpacity: 255,
-                          bgColorHex: Colors.white.value,
-                          buttonText: 'Sign in With Microsoft Account',
-                          textColorHex: Colors.black.value,
-                          iconPath: 'assets/icons/microsoft_icon.png', 
-                          buttonBorder: BorderSide(color: Colors.black, width: 1),
+                    // Text field for password
+                    TextFieldCommon(
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                      validator: passwordValidator,
+                    ),
+                    SizedBox(height: 16.0),
+                    // Forgot password
+                    GestureDetector(
+                      onTap: () {
+                        print('Forgot Password? Clicked');
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.grey.shade800),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    // Login button
+                    ElevatedButton(
+                      onPressed: () {
+                        // Before navigating, ensure that the form is valid
+                        if (_formKey.currentState?.validate() ?? false) {
+                          // If the form is valid, navigate to the faculty dashboard
+                          GoRouter.of(context).go('/faculty-dashboard');
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue, // Visible color against white background
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0), // Consistent with Material Design
+                        ),
+                        minimumSize: Size(double.infinity, 50), // Ensures the button is tall enough
+                      ),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+
                         ),
 
                       ],

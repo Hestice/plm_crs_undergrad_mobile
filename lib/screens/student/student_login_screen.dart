@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:crs_undergrad/common/text_field_common.dart';
 import 'package:crs_undergrad/helpers/validator_helper.dart';
+import 'package:crs_undergrad/common/button_common.dart';
 
 class StudentLoginScreen extends StatefulWidget {
   const StudentLoginScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
         ),
         child: Center(
           child: Container(
-            height: 360,
+            height: 390,
             width: 280,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -56,70 +57,54 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                           ),
                           const Text(
                             'Computerized Registration System',
-                            style:
-                                TextStyle(color: Color(0xFF424242), fontSize: 12),
+                            style: TextStyle(
+                              color: Color(0xFF424242),
+                              fontSize: 12,
+                              fontStyle: FontStyle.italic, // Add this line to make the text italic
+                            ),
                           ),
                           const SizedBox(height: 30),
                         ],
                       ),
                     ),
-                    // Text field for username/email
-                    TextFieldCommon(
-                      controller: emailController,
-                      hintText: 'Username/Email',
-                      obscureText: false,
-                      validator: emailValidator,
-                    ),
-                    SizedBox(height: 16.0),
-
-                    // Text field for password
-                    TextFieldCommon(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                      validator: passwordValidator,
-                    ),
-                    SizedBox(height: 16.0),
-
-                    // Forgot password
-                    GestureDetector(
-                      onTap: () {
-                        print('Forgot Password? Clicked');
+                    ButtonCommon(
+                      onPressFunctionName: () {
+                        print('clicked');
                       },
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(color: Colors.grey.shade800),
-                        ),
-                      ),
+                      bgColorOpacity: 255,
+                      bgColorHex: Colors.white.value,
+                      buttonText: 'Login with SSO',
+                      textColorHex: Colors.black.value,
+                      iconPath: 'assets/icons/key_icon.png',
+                      buttonBorder: BorderSide(color: Colors.black, width: 1),
                     ),
-                    SizedBox(height: 16.0),
 
-                    // Login button
-                    ElevatedButton(
-                      onPressed: () {
-                        GoRouter.of(context).go('/home');
-                        // Implement login button functionality here
+                    SizedBox(height: 12.0),
+                    
+                    ButtonCommon(
+                      onPressFunctionName: () {
+                        print('clicked');
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFC83B), // Corrected color code
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1.0),
-                        ),
-                        minimumSize: Size(double.infinity, 0),
-                      ),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
+                      bgColorOpacity: 255,
+                      bgColorHex: Colors.white.value,
+                      buttonText: 'Sign in With Microsoft Account',
+                      textColorHex: Colors.black.value,
+                      iconPath: 'assets/icons/microsoft_icon.png', 
+                      buttonBorder: BorderSide(color: Colors.black, width: 1),
                     ),
-                    SizedBox(height: 20),
+
+                    SizedBox(height: 12.0),
+
+                    ButtonCommon(
+                      onPressFunctionName: () {
+                        GoRouter.of(context).go('/student-login');
+                      },
+                      bgColorOpacity: 255, // Opacity, ranging from 0 to 255
+                      bgColorHex: 0xFFC83B, // Hexadecimal background color
+                      buttonText: 'Enroll at PLM',
+                      textColorHex: Colors.white.value, 
+                      buttonBorder: BorderSide(color: Color(0xFFB36C02), width: 1),
+                    ),
                   ],
                 ),
               ),

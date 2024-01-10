@@ -25,3 +25,5 @@ flutter:
     - assets/images/plm_logo.png
     - assets/images/faculty_login_screen_bg.png
     - assets/images/student_login_screen_bg.png
+    - assets/icons/key_icon.png
+    - assets/icons/microsoft_icon.png

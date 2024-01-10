@@ -94,15 +94,42 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
 
                               SizedBox(height: 12.0),
 
-                              TextFieldCommon(
-                                controller: SSOCodeController,
-                                hintText: 'Enter Verification Code',
-                                obscureText: false,
-                                validator: numericValidator,
-                                showButton: true,
-                                buttonColor: Color(0xFFC83B),
-                                buttonIconPath: 'assets/icons/arrow_right.png',
-                              ),
+                              Row(
+                              children: [
+                                Expanded(
+                                  child: TextFieldCommon(
+                                    controller: SSOCodeController,
+                                    hintText: 'Enter Verification Code',
+                                    obscureText: false,
+                                    validator: numericValidator,
+                                  ),
+                                ),
+                                SizedBox(width: 5.0),
+                                Container(
+                                  height: 48.5, // Adjust the height as needed
+                                  width: 45, // Adjust the width as needed
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      GoRouter.of(context).go('/student-home');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xFFF1B418), // Background color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6.0),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      ">",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),  
                             ],
                           )
                         else
@@ -126,7 +153,7 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
 
                               ButtonCommon(
                                 onPressFunctionName: () {
-                                  print('clicked');
+                                  GoRouter.of(context).go('/student-login');
                                 },
                                 bgColorOpacity: 255,
                                 bgColorHex: Colors.white.value,

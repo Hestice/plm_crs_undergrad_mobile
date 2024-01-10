@@ -3,6 +3,7 @@ import 'package:crs_undergrad/screens/login_screen.dart';
 import 'package:crs_undergrad/screens/faculty/faculty_login_screen.dart';
 import 'package:crs_undergrad/screens/student/student_login_screen.dart';
 import 'package:crs_undergrad/screens/landing_screen.dart';
+import 'package:crs_undergrad/screens/student/studenthome.dart';
 
 var router = GoRouter(
   routes: [
@@ -21,6 +22,10 @@ var router = GoRouter(
     GoRoute(
       path: '/faculty-login',
       builder: (context, state) => FacultyLoginScreen(),
+    ),
+    GoRoute(
+      path: '/student-home',
+      builder: (context, state) => StudentHome(),
     ),
   ],
 );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663440889034",
+    "project_id": "plm-crs-undergrad",
+    "storage_bucket": "plm-crs-undergrad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663440889034:android:a17dc51c4d2ce43192d033",
+        "android_client_info": {
+          "package_name": "com.example.crs_undergrad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCem7gvCaIZ1qNjqCl9OtvWLdnyyBCOq1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

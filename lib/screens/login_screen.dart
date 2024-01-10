@@ -1,78 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:crs_undergrad/common/text_field_common.dart';
+import 'package:crs_undergrad/helpers/validator_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  // UserInfo? user;
-  bool isLoading = false;
-
-  // void _handleSubmit(BuildContext ctx) async {
-  //   final responseProvider = Provider.of<ResponseProvider>(ctx, listen: false);
-  //   // if (_formKey.currentState?.validate() == true) {
-  //   responseProvider.isBusy(true); // loading on
-  //   await ctx.read<AuthProvider>().login({
-  //     'email': emailController.text, // Here are the textfield values
-  //     'password': passwordController.text
-  //   }).then((_) async {
-  //     GoRouter.of(context).go('/home');
-  //   }, onError: (err) {
-  //     responseProvider.snackBarOnError(err, context);
-  //     print(err);
-  //   });
-  //   responseProvider.isBusy(false); // loading off
-  //   // }
-  // }
-
-  // Future<void> checkUser() async {
-  //   final responseProvider =
-  //       Provider.of<ResponseProvider>(context, listen: false);
-  //   responseProvider.isBusy(true);
-  //   await Provider.of<AuthProvider>(context, listen: false).getUserInfo().then(
-  //       (_) async {
-  //     GoRouter.of(context).go('/home');
-  //   }, onError: (err) => print(err));
-  //   responseProvider.isBusy(false);
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   checkUser();
-    // });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
+    return 
+    Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/mainscreen_bg.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SafeArea(
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-
-                    const SizedBox(height: 50),
-                    const Text(
-                      'Welcome back!',
-                      style: TextStyle(color: Color(0xFF424242), fontSize: 16),
-                    ),
-                    const SizedBox(height: 30),
-                  ],
+              Positioned(
+                top: 10,
+                left: 5,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF4890D2),
+                    shape: CircleBorder(),
+                  ),
+                  onPressed: () {
+                    GoRouter.of(context).go('/');
+                    print('Back Button Clicked');
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
               Positioned(
@@ -80,35 +53,52 @@ class _LoginScreenState extends State<LoginScreen> {
                 left: 0,
                 right: 0,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2596BE),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
-                    ),
+                    decoration: const BoxDecoration(
+                    color: Colors.transparent, 
                   ),
                   child: Flexible(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 40, 25,
-                          100), // Adjusted padding with bottom spacing
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 140),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Please enter account details',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 35),
+                                  Image.asset(
+                                    'assets/images/plm_logo.png',
+                                    height: 200,
+                                  ),
+                                  const Text(
+                                    'Pamantasan ng Lungsod ng Maynila',
+                                    style: TextStyle(color: Color(0xFF424242), fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 30),
+                                ],
                               ),
-                              textAlign: TextAlign.left,
                             ),
-                            const SizedBox(height: 20),
-                            
-                            const SizedBox(height: 10),
-                            
-                            const SizedBox(height: 10),
+                            //Text field for username/email
+                            TextFieldCommon(
+                                controller: emailController,
+                                hintText: 'Username/Email',
+                                obscureText: false,
+                                validator: emailValidator,
+                              ),
+                            SizedBox(height: 16.0),
+
+                            //Text field for password 
+                            TextFieldCommon(
+                                controller: passwordController,
+                                hintText: 'Password',
+                                obscureText: true,
+                                validator: passwordValidator,
+                              ),
+                            SizedBox(height: 16.0),
+
+                            //forgot password
                             GestureDetector(
                               onTap: () {
                                 print('Forgot Password? Clicked');
@@ -121,33 +111,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () => {
-                                  print("pressed")
-                                },
-                                // onPressed: () => _handleSubmit(context),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 187, 21, 71),
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
-                                  ),
+                            SizedBox(height: 16.0),
+                            
+                            //Login button
+                            ElevatedButton(
+                              onPressed: () {
+                                GoRouter.of(context).go('/terms_and_conditions_screen');
+                                // Implement login button functionality here
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                Color.fromARGB(255, 255, 125, 81),
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(1.0),
                                 ),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
+                                minimumSize: Size(double.infinity, 0),
+                              ),
+                              child: Text(
+                                'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                               ),
                             ),
+                            SizedBox(height: 20),
                           ],
                         ),
                       ),
@@ -155,9 +145,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-            ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                padding: const EdgeInsets.only(bottom: 100.0),
+                child: Text(
+                  "Don't have an account yet?",
+                  style: TextStyle(
+                    color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  print('Create an account? Clicked');
+                  GoRouter.of(context).go('/create_account_screen');
+
+                },
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                  padding: const EdgeInsets.only(bottom: 80.0),
+                  child: Text(
+                    'Create An Account',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                      color: Colors.white
+                    ),
+                  ),
+                  ),
+                ),
+              ),
+            ]
           ),
         ),
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'dart:async';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -6,6 +8,14 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () {
+      GoRouter.of(context).go('/login');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +29,15 @@ class _LandingScreenState extends State<LandingScreen> {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Stack(
-            
+            children: [
+              // Centered image
+              Center(
+                child: Image.asset(
+                  'assets/images/plm_logo.png',
+                ),
+              ),
+              // Your other widgets can be added to the Stack if needed
+            ],
           ),
         ),
       ),

@@ -166,7 +166,7 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
 
                                 ButtonCommon(
                                   onPressFunctionName: () {
-                                    GoRouter.of(context).go('/student-login');
+                                     GoRouter.of(context).go('/student-home');
                                   },
                                   bgColorOpacity: 255,
                                   bgColorHex: 0xFFC83B,

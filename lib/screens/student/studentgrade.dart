@@ -189,7 +189,9 @@ class _StudentGradeState extends State<StudentGrade> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                   GoRouter.of(context).go('/student-home');
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // Set button background color
                   shape: RoundedRectangleBorder(

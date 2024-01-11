@@ -22,13 +22,34 @@ class StudentHome extends StatefulWidget {
 
 class _StudentHomeState extends State<StudentHome> {
   String selectedOption = '2024'; // default option
+  late List<Item> _data;
 
-  final List<Item> _data = List<Item>.generate(4, (int index) {
-    return Item(
-      headerText: 'Step $index: ',
-      expandedText: 'This is item number $index',
-    );
-  });
+  @override
+  void initState() {
+    super.initState();
+    _data = List<Item>.generate(4, (int index) {
+      return Item(
+        headerText: 'Step $index:',
+        expandedText: _getDescriptionForStep(index),
+      );
+    });
+  }
+
+  String _getDescriptionForStep(int index) {
+    switch (index) {
+      case 0:
+        return 'Welcome to the student home page! View your enrolled courses and grades.';
+      case 1:
+        return 'Explore upcoming events and announcements related to your courses.';
+      case 2:
+        return 'Track your academic progress and achievements.';
+      case 3:
+        return 'Connect with your peers and instructors for a collaborative learning experience.';
+      default:
+        return 'This is item number $index';
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +136,6 @@ class _StudentHomeState extends State<StudentHome> {
                   },
                   body: ListTile(
                     title: Text(item.expandedText),
-                    subtitle: const Text('Sample text'),
                   ),
                   isExpanded: item.isExpanded,
                 );
@@ -131,24 +151,7 @@ class _StudentHomeState extends State<StudentHome> {
                 height: 10,
                 width: 10,
               ), // Adding some space between existing content and buttons
-              ElevatedButton(
-                onPressed: () {
-                  // Add your button 1 action here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    "Back",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ),
-              ),
+              
               const SizedBox(height: 8), // Adding some space between buttons
               ElevatedButton(
                 onPressed: () {

@@ -29,27 +29,41 @@ class _StudentHomeState extends State<StudentHome> {
     super.initState();
     _data = List<Item>.generate(4, (int index) {
       return Item(
-        headerText: 'Step $index:',
-        expandedText: _getDescriptionForStep(index),
+        headerText: _getDescriptionForStep(true, index),
+        expandedText: _getDescriptionForStep(false, index),
       );
     });
   }
 
-  String _getDescriptionForStep(int index) {
-    switch (index) {
-      case 0:
-        return 'Welcome to the student home page! View your enrolled courses and grades.';
-      case 1:
-        return 'Explore upcoming events and announcements related to your courses.';
-      case 2:
-        return 'Track your academic progress and achievements.';
-      case 3:
-        return 'Connect with your peers and instructors for a collaborative learning experience.';
-      default:
-        return 'This is item number $index';
+  String _getDescriptionForStep(bool isHeader, int index) {
+    if (isHeader) {
+      switch (index) {
+        case 0:
+          return 'Step 1: View Schedule';
+        case 1:
+          return 'Step 2: View Assessment';
+        case 2:
+          return 'Step 3: Register';
+        case 3:
+          return 'Step 4: View Registration Form';
+        default:
+          return 'This is item number $index';
+      }
+    } else {
+      switch (index) {
+        case 0:
+          return 'Welcome to the student home page! View your enrolled courses and grades.';
+        case 1:
+          return 'Explore upcoming events and announcements related to your courses.';
+        case 2:
+          return 'Track your academic progress and achievements.';
+        case 3:
+          return 'Connect with your peers and instructors for a collaborative learning experience.';
+        default:
+          return 'This is item number $index';
+      }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +165,7 @@ class _StudentHomeState extends State<StudentHome> {
                 height: 10,
                 width: 10,
               ), // Adding some space between existing content and buttons
-              
+
               const SizedBox(height: 8), // Adding some space between buttons
               ElevatedButton(
                 onPressed: () {

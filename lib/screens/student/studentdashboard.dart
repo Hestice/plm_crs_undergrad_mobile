@@ -118,7 +118,7 @@ class StudentDashboard extends StatelessWidget {
             // Logout Button
             ElevatedButton(
               onPressed: () {
-                // GoRouter.of(context).go('/login');
+                GoRouter.of(context).go('/login');
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.red, // Background color
@@ -155,13 +155,13 @@ class StudentDashboard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: OutlinedButton(
         onPressed: () {
-          // if (title == 'Teaching Assignment') {
-          //   context.go('/teaching-assignment');
-          // } else if (title == 'View Assignments') {
-          //   context.go('/view-assignments'); // This is the new line you add
-          // } else {
-          //   // Handle other actions
-          // }
+          if (title == 'View Grades') {
+            context.go('/student-grades');
+          } else if (title == 'Enroll') {
+            context.go('/student-home'); // This is the new line you add
+          } else {
+            // Handle other actions
+          }
         },
         child: Text(title),
         style: OutlinedButton.styleFrom(
@@ -174,3 +174,8 @@ class StudentDashboard extends StatelessWidget {
     );
   }
 }
+
+
+// GoRouter.of(context).go('/student-grades');
+// GoRouter.of(context).go('/student-home');
+

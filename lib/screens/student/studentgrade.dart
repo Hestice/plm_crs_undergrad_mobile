@@ -185,24 +185,6 @@ class _StudentGradeState extends State<StudentGrade> {
                 ),
               ),
               const SizedBox(height: 8), // Adding some space between buttons
-              ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).go('/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    "Log Out",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ),
-              ),
             ],
           ),
           Spacer(),
@@ -211,10 +193,10 @@ class _StudentGradeState extends State<StudentGrade> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).go('/student-home');
+                  GoRouter.of(context).go('/student-dashboard');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Set button background color
+                  backgroundColor: Colors.red, // Set button background color
                   shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(8.0), // Set button border radius
@@ -223,7 +205,7 @@ class _StudentGradeState extends State<StudentGrade> {
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Text(
-                    "Home",
+                    "Back",
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

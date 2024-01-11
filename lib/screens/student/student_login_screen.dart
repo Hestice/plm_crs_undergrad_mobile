@@ -73,7 +73,6 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                             ],
                           ),
                         ),
-
                         if (showTextFieldCode)
                           Column(
                             children: [
@@ -88,47 +87,49 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                                 buttonText: 'Login with SSO',
                                 textColorHex: Colors.black.value,
                                 iconPath: 'assets/icons/key_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                                buttonBorder:
+                                    BorderSide(color: Colors.black, width: 1),
                               ),
-
                               SizedBox(height: 12.0),
-
                               Row(
-                              children: [
-                                Expanded(
-                                  child: TextFieldCommon(
-                                    controller: SSOCodeController,
-                                    hintText: 'Enter Verification Code',
-                                    obscureText: false,
-                                    validator: numericValidator,
-                                  ),
-                                ),
-                                SizedBox(width: 5.0),
-                                Container(
-                                  height: 48.5, // Adjust the height as needed
-                                  width: 45, // Adjust the width as needed
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      GoRouter.of(context).go('/student-home');
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFFF1B418), // Background color
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(6.0),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      ">",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
+                                children: [
+                                  Expanded(
+                                    child: TextFieldCommon(
+                                      controller: SSOCodeController,
+                                      hintText: 'Enter Verification Code',
+                                      obscureText: false,
+                                      validator: numericValidator,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),  
+                                  SizedBox(width: 5.0),
+                                  Container(
+                                    height: 48.5, // Adjust the height as needed
+                                    width: 45, // Adjust the width as needed
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        GoRouter.of(context)
+                                            .go('/student-dashboard');
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(
+                                            0xFFF1B418), // Background color
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        ">",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           )
                         else
@@ -145,11 +146,10 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                                 buttonText: 'Login with SSO',
                                 textColorHex: Colors.black.value,
                                 iconPath: 'assets/icons/key_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                                buttonBorder:
+                                    BorderSide(color: Colors.black, width: 1),
                               ),
-
                               SizedBox(height: 12.0),
-
                               ButtonCommon(
                                 onPressFunctionName: () {
                                   GoRouter.of(context).go('/student-login');
@@ -159,21 +159,21 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                                 buttonText: 'Sign in With Microsoft Account',
                                 textColorHex: Colors.black.value,
                                 iconPath: 'assets/icons/microsoft_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
+                                buttonBorder:
+                                    BorderSide(color: Colors.black, width: 1),
                               ),
-
-                               SizedBox(height: 12.0),
-
-                                ButtonCommon(
-                                  onPressFunctionName: () {
-                                     GoRouter.of(context).go('/student-home');
-                                  },
-                                  bgColorOpacity: 255,
-                                  bgColorHex: 0xFFC83B,
-                                  buttonText: 'Enroll at PLM',
-                                  textColorHex: Colors.white.value,
-                                  buttonBorder: BorderSide(color: Color(0xFFB36C02), width: 1),
-                                ),
+                              SizedBox(height: 12.0),
+                              ButtonCommon(
+                                onPressFunctionName: () {
+                                  GoRouter.of(context).go('/student-dashboard');
+                                },
+                                bgColorOpacity: 255,
+                                bgColorHex: 0xFFC83B,
+                                buttonText: 'Enroll at PLM',
+                                textColorHex: Colors.white.value,
+                                buttonBorder: BorderSide(
+                                    color: Color(0xFFB36C02), width: 1),
+                              ),
                             ],
                           ),
                       ],

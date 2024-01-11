@@ -52,12 +52,16 @@ class _StudentHomeState extends State<StudentHome> {
     } else {
       switch (index) {
         case 0:
+          // RETRIEVE CRS IMAGE
           return 'Welcome to the student home page! View your enrolled courses and grades.';
         case 1:
+          // VIEW RECEIPT
           return 'Explore upcoming events and announcements related to your courses.';
         case 2:
+          // PLEASE SAVE A COPY OR PRINT
           return 'Track your academic progress and achievements.';
         case 3:
+          // SAVE A COPY BUTTON
           return 'Connect with your peers and instructors for a collaborative learning experience.';
         default:
           return 'This is item number $index';
@@ -157,40 +161,41 @@ class _StudentHomeState extends State<StudentHome> {
             ),
           ),
           Spacer(),
-          Column(
+          const Column(
             mainAxisAlignment:
                 MainAxisAlignment.center, // Adjust alignment as needed
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 10,
                 width: 10,
               ), // Adding some space between existing content and buttons
 
-              const SizedBox(height: 8), // Adding some space between buttons
-              ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).go('/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    "Log Out",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ),
-              ),
+              SizedBox(height: 8), // Adding some space between buttons
             ],
           ),
           Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).go('/student-dashboard');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red, // Set button background color
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(8.0), // Set button border radius
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Text(
+                    "Back",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -205,25 +210,6 @@ class _StudentHomeState extends State<StudentHome> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Text(
                     "Home",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).go('/student-grades');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Set button background color
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8.0), // Set button border radius
-                  ),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Text(
-                    "Grades",
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

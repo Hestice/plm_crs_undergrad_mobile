@@ -149,6 +149,8 @@ class FacultyDashboard extends StatelessWidget {
             context.go('/teaching-assignment');
           } else if (title == 'View Assignments') {
             context.go('/view-assignments'); // This is the new line you add
+          } else if (title == 'View Grades') {
+            context.go('/faculty-grades'); // This is the new line you add
           } else {
             // Handle other actions
           }

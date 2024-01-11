@@ -214,10 +214,10 @@ class _StudentGradeState extends State<StudentGrade> {
                   GoRouter.of(context).go('/student-home');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Set button background color
+                  backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(8.0), // Set button border radius
+                        BorderRadius.circular(8.0),
                   ),
                 ),
                 child: const Padding(
@@ -232,7 +232,7 @@ class _StudentGradeState extends State<StudentGrade> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      Colors.yellowAccent, // Set button background color
+                      Colors.yellowAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(8.0), // Set button border radius

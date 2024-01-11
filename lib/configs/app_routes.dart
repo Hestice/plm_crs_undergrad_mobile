@@ -11,6 +11,7 @@ import '../screens/faculty/faculty_assignment_detail_screen.dart';
 import '../screens/faculty/faculty_assignments_screen.dart';
 import '../screens/faculty/faculty_dashboard_screen.dart';
 import '../screens/faculty/faculty_teaching_assignment_screen.dart';
+import '../screens/faculty/faculty_view_grades_screen.dart';
 
 var router = GoRouter(
   routes: [
@@ -53,6 +54,10 @@ var router = GoRouter(
     GoRoute(
       path: '/student-grades',
       builder: (context, state) => StudentGrade(),
+    ),
+    GoRoute(
+      path: '/faculty-grades',
+      builder: (context, state) => FacultyGrade(),
     ),
     // GoRoute(
     //   path: '/faculty-home',

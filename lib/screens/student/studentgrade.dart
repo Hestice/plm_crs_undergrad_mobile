@@ -131,9 +131,30 @@ class _StudentGradeState extends State<StudentGrade> {
                     TableCell(child: Center(child: Text('lorem epsum blabla'))),
                   ],
                 ),
+
                 // Add more TableRow widgets for additional rows as needed
               ],
             ),
+          ),
+          Spacer(),
+          Table(
+            children: const [
+              TableRow(
+                children: [
+                  TableCell(
+                    child: Center(
+                        child: Text(
+                      'GWA: 1.5',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    )),
+                  ),
+                ],
+              ),
+            ],
           ),
           Spacer(),
           Spacer(),
@@ -190,7 +211,7 @@ class _StudentGradeState extends State<StudentGrade> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                   GoRouter.of(context).go('/student-home');
+                  GoRouter.of(context).go('/student-home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, // Set button background color

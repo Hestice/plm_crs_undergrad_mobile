@@ -9,7 +9,11 @@ class TeachingAssignment extends StatelessWidget {
     // Dummy data for the table
     final assignments = List.generate(
       6,
-          (index) => {'status': 'CP', 'code': '2023 - CSE 101-1 - PRACTICUM', 'id': index.toString()},
+      (index) => {
+        'status': 'CP',
+        'section': '2023 - CSE 101-1 - PRACTICUM',
+        'id': index.toString(),
+      },
     );
 
     return Scaffold(
@@ -30,15 +34,25 @@ class TeachingAssignment extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Status',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Section',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
           Expanded(
-            child: GridView.builder(
+            child: ListView.builder(
               padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 3 / 2,
-              ),
               itemCount: assignments.length,
               itemBuilder: (context, index) {
                 final assignment = assignments[index];
@@ -49,7 +63,7 @@ class TeachingAssignment extends StatelessWidget {
                   },
                   child: AssignmentCard(
                     status: assignment['status']!,
-                    code: assignment['code']!,
+                    section: assignment['section']!,
                   ),
                 );
               },
@@ -77,27 +91,18 @@ class TeachingAssignment extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 3 / 2,
-                    ),
-                    itemCount: assignments.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          // When a card is tapped, navigate to the detail screen
-                          GoRouter.of(context).go('/assignment-detail');
-                        },
-                        child: AssignmentCard(
-                          status: assignments[index]['status']!,
-                          code: assignments[index]['code']!,
-                        ),
-                      );
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Use GoRouter to navigate back to the dashboard screen
+                      GoRouter.of(context).go('/login');
                     },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Text('Logout', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -111,35 +116,40 @@ class TeachingAssignment extends StatelessWidget {
 
 class AssignmentCard extends StatelessWidget {
   final String status;
-  final String code;
+  final String section;
 
   const AssignmentCard({
     Key? key,
     required this.status,
-    required this.code,
+    required this.section,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Color color = status == 'CP' ? Colors.blue : Colors.orange; // Choose color based on status
+    Color statusColor = status.toLowerCase() == 'cp' ? Colors.blue : Colors.orange; // Choose color based on status
+    String displayStatus = status.toLowerCase() == 'cp' ? 'Pending' : status;
 
-    return Card(
-      color: color,
-      child: GridTile(
-        header: GridTileBar(
-          title: Text(status, style: const TextStyle(color: Colors.white)),
-          backgroundColor: color.withOpacity(0.7),
-        ),
-        child: Center(
-          child: Text(
-            code,
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Card(
+            color: statusColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                displayStatus,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           ),
-        ),
+          Text(
+            section,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ],
       ),
     );
   }
 }
-
-

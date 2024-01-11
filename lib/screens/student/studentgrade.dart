@@ -198,8 +198,7 @@ class _StudentGradeState extends State<StudentGrade> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red, // Set button background color
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8.0), // Set button border radius
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 child: const Padding(
@@ -213,8 +212,7 @@ class _StudentGradeState extends State<StudentGrade> {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.yellowAccent, // Set button background color
+                  backgroundColor: Colors.yellowAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(8.0), // Set button border radius

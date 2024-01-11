@@ -85,7 +85,7 @@ class StudentDashboard extends StatelessWidget {
                     const Divider(height: 32.0, thickness: 1.2),
                     // List of Actions
                     _buildActionItem(context, 'View Grades'),
-                    _buildActionItem(context, 'Print SER'),
+                    _buildActionItem(context, 'Enroll'),
                     _buildActionItem(context, 'Open Teams'),
                     const SizedBox(height: 16.0),
                     // Open Teams Button

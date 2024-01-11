@@ -50,7 +50,6 @@ class _StudentHomeState extends State<StudentHome> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +150,7 @@ class _StudentHomeState extends State<StudentHome> {
                 height: 10,
                 width: 10,
               ), // Adding some space between existing content and buttons
-              
+
               const SizedBox(height: 8), // Adding some space between buttons
               ElevatedButton(
                 onPressed: () {

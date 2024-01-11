@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:crs_undergrad/common/text_field_common.dart';
 import 'package:crs_undergrad/helpers/validator_helper.dart';
 import 'package:crs_undergrad/common/button_common.dart';
+
 class FacultyLoginScreen extends StatefulWidget {
   const FacultyLoginScreen({Key? key}) : super(key: key);
 
@@ -12,12 +14,57 @@ class FacultyLoginScreen extends StatefulWidget {
 
 class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController SSOCodeController = TextEditingController();
-  
-  bool showTextFieldCode = false;
+
+  bool showEmailAndPasswordFields = false;
+
+  void _toggleEmailPasswordFields() {
+    setState(() {
+      showEmailAndPasswordFields = !showEmailAndPasswordFields;
+    });
+  }
+
+  Future<void> _loginWithEmailPassword() async {
+    print("Login function called"); // Debug print
+
+    // Early return if form is not valid
+    if (!(_formKey.currentState?.validate() ?? false)) {
+      print('Form validation failed');
+      return;
+    }
+
+    // Hardcoded dummy credentials
+    const String dummyEmail = 'facultyplm@gmail.com';
+    const String dummyPassword = 'faculty123';
+
+    // Get the input values
+    String inputEmail = emailController.text;
+    String inputPassword = passwordController.text;
+
+    // Check if the input credentials match the dummy credentials
+    if (inputEmail == dummyEmail && inputPassword == dummyPassword) {
+      // Navigate to the home screen after successful login
+      _navigateToHome();
+    } else {
+      // Handle login failure (e.g., show an alert dialog or a snackbar)
+      print('Login failed: Incorrect email or password');
+      // Consider displaying a user-friendly error message
+    }
+  }
+
+  void _navigateToHome() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        GoRouter.of(context).go('/faculty-dashboard');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    double containerHeight = showEmailAndPasswordFields ? 460.0 : 390.0; // Adjust container height
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -26,167 +73,84 @@ class _FacultyLoginScreenState extends State<FacultyLoginScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Stack(
-          children: [
-            Center(
-              child: Container(
-                height: 360,
-                width: 280,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(11),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 30),
-                              Image.asset(
-                                'assets/images/plm_logo.png',
-                                height: 89,
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                'Pamantasan ng Lungsod ng Maynila',
-                                style:
-                                    TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 12),
-                              ),
-                              const Text(
-                                'Computerized Registration System',
-                                style: TextStyle(
-                                  color: Color(0xFF424242),
-                                  fontSize: 12,
-                                  fontStyle: FontStyle.italic, // Add this line to make the text italic
-                                ),
-                              ),
-                              const SizedBox(height: 30),
-                            ],
-                          ),
+        child: Center(
+          child: Container(
+            height: containerHeight,
+            width: 280,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(11),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Top content with image and texts
+                      Image.asset('assets/images/plm_logo.png', height: 89),
+                      const SizedBox(height: 10),
+                      const Text('Pamantasan ng Lungsod ng Maynila', style: TextStyle(fontSize: 12)),
+                      const Text('Computerized Registration System', style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
+                      const SizedBox(height: 30),
+
+                      // Toggle Email and Password Fields
+                      ButtonCommon(
+                        onPressFunctionName: _toggleEmailPasswordFields,
+                        bgColorOpacity: 255,
+                        bgColorHex: Colors.white.value,
+                        buttonText: 'Login with Email',
+                        textColorHex: Colors.black.value,
+                        iconPath: 'assets/icons/key_icon.png',
+                        buttonBorder: BorderSide(color: Colors.black, width: 1),
+                      ),
+                      const SizedBox(height: 12.0),
+
+                      // Email and Password Fields
+                      if (showEmailAndPasswordFields) ...[
+                        TextFieldCommon(
+                          controller: emailController,
+                          hintText: 'Email',
+                          obscureText: false,
+                          validator: (value) => (value != null && value.isEmpty) ? 'Enter email' : null,
                         ),
-
-                        if (showTextFieldCode)
-                          Column(
-                            children: [
-                              ButtonCommon(
-                                onPressFunctionName: () {
-                                  setState(() {
-                                    showTextFieldCode = !showTextFieldCode;
-                                  });
-                                },
-                                bgColorOpacity: 255,
-                                bgColorHex: Colors.white.value,
-                                buttonText: 'Login with SSO',
-                                textColorHex: Colors.black.value,
-                                iconPath: 'assets/icons/key_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
-                              ),
-
-                              SizedBox(height: 12.0),
-
-                              Row(
-                              children: [
-                                Expanded(
-                                  child: TextFieldCommon(
-                                    controller: SSOCodeController,
-                                    hintText: 'Enter Verification Code',
-                                    obscureText: false,
-                                    validator: numericValidator,
-                                  ),
-                                ),
-                                SizedBox(width: 5.0),
-                                Container(
-                                  height: 48.5, // Adjust the height as needed
-                                  width: 45, // Adjust the width as needed
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      GoRouter.of(context).go('/faculty-dashboard');
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF3E8AD0), // Background color
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(6.0),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      ">",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),  
-                            ],
-                          )
-                        else
-                          Column(
-                            children: [
-                              ButtonCommon(
-                                onPressFunctionName: () {
-                                  setState(() {
-                                    showTextFieldCode = !showTextFieldCode;
-                                  });
-                                },
-                                bgColorOpacity: 255,
-                                bgColorHex: Colors.white.value,
-                                buttonText: 'Login with SSO',
-                                textColorHex: Colors.black.value,
-                                iconPath: 'assets/icons/key_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
-                              ),
-
-                              SizedBox(height: 12.0),
-
-                              ButtonCommon(
-                                onPressFunctionName: () {
-                                  GoRouter.of(context).go('/faculty-login');
-                                },
-                                bgColorOpacity: 255,
-                                bgColorHex: Colors.white.value,
-                                buttonText: 'Sign in With Microsoft Account',
-                                textColorHex: Colors.black.value,
-                                iconPath: 'assets/icons/microsoft_icon.png',
-                                buttonBorder: BorderSide(color: Colors.black, width: 1),
-                              ),
-                            ],
+                        const SizedBox(height: 12.0),
+                        TextFieldCommon(
+                          controller: passwordController,
+                          hintText: 'Password',
+                          obscureText: true,
+                          validator: (value) => (value != null && value.isEmpty) ? 'Enter password' : null,
+                        ),
+                        const SizedBox(height: 24.0),
+                        ElevatedButton(
+                          onPressed: _loginWithEmailPassword,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           ),
+                          child: const Text('Login', style: TextStyle(color: Colors.white)),
+                        ),
                       ],
-                    ),
+
+                      // Other buttons and functionalities
+                      ButtonCommon(
+                        onPressFunctionName: () => GoRouter.of(context).go('/student-login'),
+                        bgColorOpacity: 255,
+                        bgColorHex: Colors.white.value,
+                        buttonText: 'Sign in With Microsoft Account',
+                        textColorHex: Colors.black.value,
+                        iconPath: 'assets/icons/microsoft_icon.png',
+                        buttonBorder: BorderSide(color: Colors.black, width: 1),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-            GestureDetector(
-                onTap: () {
-                  print('Trouble clicked');
-                },
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                  padding: const EdgeInsets.only(bottom: 30.0),
-                  child: Text(
-                    'Having trouble signing in?',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.white,
-                      color: Colors.white
-                    ),
-                  ),
-                  ),
-                ),
-              ),
-          ],
-        )
-        
+          ),
+        ),
       ),
     );
   }

@@ -20,6 +20,7 @@ var router = GoRouter(
       path: '/',
       builder: (context, state) => LandingScreen(),
     ),
+
     GoRoute(
       path: '/login',
       builder: (context, state) => LoginScreen(),
